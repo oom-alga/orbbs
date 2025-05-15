@@ -1,0 +1,33 @@
+// $container-max-widths
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:math";
+@use "sass:string";
+@use './variables' as vars;
+@use './rfs/rfs-dart.scss' as rfs;
+
+@mixin media-breakpoint($breakpoint) {
+    @if map.has-key(vars.$container-max-widths, $breakpoint) {
+        $breakpoint-value: map.get(vars.$container-max-widths, $breakpoint);
+
+        @media only screen and (max-width: #{$breakpoint-value}) {
+            @content;
+        }
+    } @else if meta.type-of($breakpoint) == number {
+        @media only screen and (max-width: #{$breakpoint}) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint '#{$breakpoint}' tidak ditemukan dalam $container-max-widths.";
+        @content;
+    }
+}
+
+@mixin spacer($size, $property) {
+    @if meta.type-of($size) == number and map.has-key(vars.$space-sizes, $size) {
+        @include rfs.rfs(map.get(vars.$space-sizes, $size), $property);
+    } @else {
+        @include rfs.rfs($size, $property);
+    }
+}

@@ -1,0 +1,36 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/rfs/rfs-dart.scss' as rfs;
+@use '../abstracts/mixins' as space;
+@use '../abstracts/mixins' as breakpoint;
+
+.cardProjectSimple{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 16px;
+    position: relative;
+    
+    @include space.spacer(2, padding);
+    &__media{
+        flex: 1 1 auto;
+        width: 100%;
+        height: 100%;
+        img{
+            aspect-ratio: 4 / 3;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &__heading {
+        flex: 0 0 auto;
+        &-title{
+            @include rfs.font-size(vars.$h6-font-size);
+            font-weight: vars.$font-weight-medium;
+        }
+    }
+    @include breakpoint.media-breakpoint(sm) {
+        @include space.spacer(0, padding);
+    }
+}

@@ -1,0 +1,87 @@
+// Variabel utama
+$prefix: "sipe-";
+
+$theme-primary          : red;
+$theme-secondary        : orange;
+
+$data-theme             : "light", "dark";
+
+
+// Map warna untuk tema gelap/terang
+$colors-switch: (
+  'background'          : (#ffffff, #111111),
+  'background-secondary': (#f4f5f7, #1F1F1F),
+  'color'               : (#141414, #F0F2F4),
+  'color-secondary'     : (#535353, #F0F2F4)
+);
+
+
+$font-family-base:            'Open Sauce One' !default;
+$font-family-heading:         'Acumin Pro ExtraCond' !default;
+
+
+$spacer:                      1rem !default;
+$font-size-base:              1rem !default;
+$font-size-big:               3rem !default;
+
+
+$font-size-root:              null !default;
+$font-size-sm:                $font-size-base * .875 !default;
+$font-size-lg:                $font-size-base * 1.25 !default;
+
+$font-weight-lighter:         lighter !default;
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-medium:          500 !default;
+$font-weight-semibold:        600 !default;
+$font-weight-bold:            700 !default;
+$font-weight-bolder:          bolder !default;
+
+$font-weight-base:            $font-weight-normal !default;
+
+$h1-font-size:                $font-size-base * 2.99 !default;
+$h2-font-size:                $font-size-base * 2.49 !default;;
+$h3-font-size:                $font-size-base * 2.07 !default;
+$h4-font-size:                $font-size-base * 1.73 !default;
+$h5-font-size:                $font-size-base * 1.44 !default;
+$h6-font-size:                $font-size-base * 1.20 !default;
+
+$h1-font-display:             $font-size-big * 2.99 !default;
+$h2-font-display:             $font-size-big * 2.49 !default;
+$h3-font-display:             $font-size-big * 2.07 !default;
+$h4-font-display:             $font-size-big * 1.73 !default;
+$h5-font-display:             $font-size-big * 1.44 !default;
+$h6-font-display:             $font-size-big * 1.20 !default;
+
+
+$headings-margin-bottom:      $spacer * .5 !default;
+$headings-font-family:        $font-family-base !default;
+$headings-font-style:         null !default;
+$headings-font-weight:        500 !default;
+$headings-line-height:        1.2 !default;
+$headings-color:              inherit !default;
+
+
+$grid-gutter-width:           10rem !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 768px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+) !default;
+
+$space-size-base: 1rem;
+
+$space-sizes: (
+    1: $space-size-base * 0.250,    // 4px
+    2: $space-size-base * 0.500,    // 8px
+    3: $space-size-base * 1.000,    // 16px
+    4: $space-size-base * 1.500,    // 24px
+    5: $space-size-base * 2.000,    // 32px
+    6: $space-size-base * 3.000,    // 48px
+    7: $space-size-base * 4.000,    // 64px
+    8: $space-size-base * 5.000,    // 80px
+    9: $space-size-base * 7.500     // 120px
+) !default;

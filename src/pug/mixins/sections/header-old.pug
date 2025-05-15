@@ -1,0 +1,30 @@
+//- Header Section Component
+//- @param {Object} options - Header options
+//- @param {String} options.style - Header style (default, transparent, sticky)
+//- @param {Boolean} options.hasSearch - Include search in header
+//- @param {Object} options.logo - Logo details
+
+mixin header(options)
+  - const defaults = {style: 'default', hasSearch: false, logo: {src: require('../../assets/images/ABB_Logo.png'), alt: 'Logo'}, classes: ''}
+  - const opts = Object.assign({}, defaults, options || {})
+  - const styleClass = opts.style !== 'default' ? `header--${opts.style}` : ''
+  - const allClasses = ['header', styleClass, opts.classes].filter(Boolean).join(' ')
+  
+  header(class=allClasses)&attributes(attributes)
+    .container
+      .header__inner
+        .header__logo
+          a(href="/")
+            img(src=require('../../assets/images/ABB_Logo.png') alt=opts.logo.alt)
+            //- img(src=require(opts.logo.src), alt=opts.logo.alt)
+        
+        //- nav.header__nav
+          //- include ../../partials/navigation
+        
+        //- .header__actions
+          //- if opts.hasSearch
+          //-   .header__search
+          //-     include ../../partials/search
+          
+          //- .header__buttons
+          //-   block   

@@ -1,0 +1,244 @@
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin'); // Uncomment ini
+const glob = require('glob');
+
+// Import PurgeCSS config
+const purgeCSSConfig = require('./purgecss.config.js');
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
+// Dapatkan semua file Pug dari folder pages
+const pugFiles = glob.sync('./src/pug/pages/**/*.pug');
+
+// Buat array plugins
+const plugins = [];
+
+// Selalu gunakan MiniCssExtractPlugin untuk production
+if (!isDevelopment) {
+    plugins.push(
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].[contenthash].css'
+        })
+    );
+} else {
+    // Untuk development, tetap gunakan MiniCssExtractPlugin jika ingin CSS terpisah
+    // atau hapus ini jika ingin menggunakan style-loader
+    plugins.push(
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css'
+        })
+    );
+}
+
+// Tambahkan PurgeCSS hanya untuk production
+if (!isDevelopment) {
+    plugins.push(purgeCSSConfig);
+}
+
+// Tambahkan HtmlWebpackPlugin untuk setiap file Pug
+pugFiles.forEach(pugFile => {
+    const filename = path.basename(pugFile).replace('.pug', '.html');
+    plugins.push(
+        new HtmlWebpackPlugin({
+            template: pugFile,
+            filename: filename,
+            minify: !isDevelopment ? {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true
+            } : false
+        })
+    );
+});
+
+module.exports = {
+    entry: {
+        main: './src/js/main.js'
+    },
+    output: {
+        filename: isDevelopment ? 'js/[name].js' : 'js/[name].[contenthash].js',
+        path: path.resolve(__dirname, 'dist'),
+        clean: true
+    },
+    module: {
+        rules: [
+            // JavaScript
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+            // SCSS
+            {
+                test: /\.scss$/,
+                use: [
+                    // Gunakan MiniCssExtractPlugin.loader untuk SEMUA mode
+                    // agar CSS selalu terpisah dari JS
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            importLoaders: 2
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            postcssOptions: {
+                                plugins: [
+                                    'autoprefixer'
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            sassOptions: {
+                                outputStyle: isDevelopment ? 'expanded' : 'compressed',
+                                includePaths: ['node_modules']
+                            }
+                        }
+                    }
+                ]
+            },
+            // CSS
+            {
+                test: /\.css$/,
+                use: [
+                    // Gunakan MiniCssExtractPlugin.loader untuk SEMUA mode
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            postcssOptions: {
+                                plugins: [
+                                    'autoprefixer'
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            // Pug dan asset rules lainnya tetap sama
+            {
+                test: /\.pug$/,
+                use: [
+                    {
+                        loader: 'pug-loader',
+                        options: {
+                            pretty: isDevelopment
+                        }
+                    }
+                ]
+            },
+            // Images
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/images/[name].[hash][ext]'
+                }
+            },
+            // Videos
+            {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/videos/[name].[hash][ext]'
+                }
+            },
+            // Fonts
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[path][name].[hash][ext]'
+                }
+            }
+        ]
+    },
+    optimization: {
+        minimize: !isDevelopment,
+        minimizer: [
+            new TerserPlugin({
+                extractComments: false,
+                terserOptions: {
+                    format: {
+                        comments: false,
+                    },
+                },
+            }),
+            new CssMinimizerPlugin() // Uncomment ini untuk optimasi CSS
+        ],
+    },
+    plugins: plugins,
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        watchFiles: {
+            paths: ['src/**/*.pug'],
+            options: {
+                usePolling: false,
+            },
+        },
+        compress: true,
+        port: 4194,
+        hot: true, // Tetap aktifkan hot untuk JS
+        open: {
+            app: {
+              name: ['google-chrome', '--incognito'],
+            }
+        },
+        client: {
+            logging: 'error',
+            overlay: {
+                errors: true,
+                warnings: true,
+            },
+            progress: false
+        },
+        devMiddleware: {
+            stats: {
+                all: false,
+                errors: true,
+                errorDetails: true,
+                warnings: true,
+                modules: false,
+                assets: false,
+                chunks: false,
+                colors: true
+            }
+        }
+    },
+    mode: isDevelopment ? 'development' : 'production',
+    devtool: isDevelopment ? 'eval-source-map' : false,
+    watchOptions: {
+        ignored: /node_modules/,
+        aggregateTimeout: 300,
+        poll: 1000,
+    }
+};

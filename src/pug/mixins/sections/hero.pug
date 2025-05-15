@@ -1,0 +1,21 @@
+mixin hero-singleHorizontal(options)
+    include ../groups/project
+    include ../groups/heading
+    section.hero-singleHorizontal
+        .hero-singleHorizontal__lists.table-container(data-lenis-prevent)
+            +projectListHorizontal       
+        .hero-singleHorizontal__caption.container
+            .hero-singleHorizontal__heading     
+                +headingHeroSimple
+
+
+mixin singleBasic(options)
+    include ../components/button
+    include ../groups/heading
+    section.singleBasic  
+        .singleBasic__backAction 
+            a(href="#")
+                +buttonBack 
+                    | Back To All Work
+        .singleBasic__title 
+            +headingHeroBig

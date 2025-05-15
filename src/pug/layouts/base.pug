@@ -1,0 +1,23 @@
+//- src/pug/layouts/base.pug
+block variables
+  - var title = 'Default Title'
+  - var description = 'Default description'
+  - var bodyClass = ''
+  - var dataThemes = 'light' // light/dark
+  
+
+doctype html
+html(lang="en", data-theme=dataThemes)
+    head
+      include ../partials/head
+
+    body(class=bodyClass || '')
+      block header
+    
+      
+      main#contentMain
+        block content
+
+      block footer   
+
+      include ../partials/scripts

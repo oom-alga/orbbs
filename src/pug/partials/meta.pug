@@ -1,0 +1,8 @@
+//- SEO Meta Tags
+if canonicalUrl
+  link(rel="canonical" href=canonicalUrl)
+
+if noindex
+  meta(name="robots" content="noindex, nofollow")
+else
+  meta(name="robots" content="index, follow")

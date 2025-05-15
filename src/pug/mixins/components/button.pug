@@ -1,0 +1,23 @@
+//- Button Component
+//- @param {Object} options - Button options
+//- @param {String} options.style - Button style (primary, secondary, outline, text)
+//- @param {String} options.size - Button size (small, medium, large)
+//- @param {String} options.href - URL (converts to <a> if provided)
+//- @param {Boolean} options.fullWidth - Full width button
+
+mixin button(options)
+  - const defaults = {style: 'primary', size: 'medium', href: null, fullWidth: false, classes: ''}
+  - const opts = Object.assign({}, defaults, options || {})
+  - const tag = opts.href ? 'a' : 'button'
+  - const baseClass = 'btn'
+  - const styleClass = `${baseClass}--${opts.style}`
+  - const sizeClass = opts.size !== 'medium' ? `${baseClass}--${opts.size}` : ''
+  - const widthClass = opts.fullWidth ? `${baseClass}--full-width` : ''
+  - const allClasses = [baseClass, styleClass, sizeClass, widthClass, opts.classes].filter(Boolean).join(' ')
+  
+  #{tag}(class=allClasses href=opts.href)&attributes(attributes)
+    block
+
+mixin buttonBack
+    .buttonBack
+        block

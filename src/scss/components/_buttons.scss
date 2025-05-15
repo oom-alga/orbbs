@@ -1,0 +1,8 @@
+@use '../abstracts/index.scss' as *;
+
+.buttonBack{
+    display: inline-flex;
+    align-items: center;
+    font-weight: $font-weight-medium;
+    @include spacer(2, gap);
+}

@@ -1,0 +1,91 @@
+@use '../abstracts/'as vars;
+@use '../abstracts/rfs/rfs-dart.scss'as rfs;
+
+.loader {
+    background-color: green;
+    position: fixed;
+    width: 100dvw;
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    font-size: vars.$h1-font-size;
+    @include vars.spacer(9, padding);
+
+    &__heading {
+        display: inline-flex;
+        flex-direction: column;
+        width: 400px;
+        max-width: 100%;
+        height: 100%;
+        justify-content: end;
+        position: relative;
+    }
+
+    &__title {
+        // color: var(--#{vars.$prefix}background);
+        font-weight: vars.$font-weight-bold;
+        @include vars.spacer(3, margin-bottom);
+        @include rfs.font-size(vars.$h3-font-display);
+    }
+
+    &__description {
+        @include vars.spacer(3, margin-top);
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            @include vars.spacer(3, row-gap);
+            @include vars.spacer(4, column-gap);
+
+            li {
+                @include rfs.font-size(vars.$h6-font-size);
+            }
+        }
+    }
+}
+
+
+.loader__animation-slider {
+    position: relative;
+    width: 100%;
+    height: 2px;
+}
+
+.line {
+    position: absolute;
+    background-color: red;
+    width: 100%;
+    height: 2px;
+
+}
+
+.break {
+    position: absolute;
+    background-color: yellow;
+    width: 6px;
+    height: 2px;
+}
+
+.dot1 {
+    animation: loading 2s infinite;
+}
+
+.dot2 {
+    animation: loading 2s 0.5s infinite;
+}
+
+.dot3 {
+    animation: loading 2s 1s infinite;
+}
+
+@keyframes loading {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: 100%;
+    }
+}

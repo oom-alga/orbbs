@@ -1,0 +1,24 @@
+//- Simple Footer Section Component
+//- @param {Object} options - Footer options
+//- @param {String} options.style - Footer style (default, dark, light)
+//- @param {Boolean} options.hasSocial - Include social media links
+//- @param {String} options.copyrightText - Copyright text
+
+mixin footer(options)
+    - const defaults = {
+    -   style: 'default',
+    -   hasSocial: true,
+    -   copyrightText: `© ${new Date().getFullYear()} Your Company. All rights reserved.`,
+    -   classes: ''
+    - }
+    - const opts = Object.assign({}, defaults, options || {})
+    - const styleClass = opts.style !== 'default' ? `footer--${opts.style}` : ''
+    - const allClasses = ['footer', styleClass, opts.classes].filter(Boolean).join(' ')
+    
+    footer(class=allClasses)&attributes(attributes)
+        .container
+            .footer__bottom
+                p.footer__copyright!= opts.copyrightText
+            .footer__main
+                | Footerrrrrs
+                //- block footer-content

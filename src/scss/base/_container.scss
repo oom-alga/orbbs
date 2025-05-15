@@ -1,0 +1,50 @@
+@use '../abstracts' as *;
+
+%container {
+    box-sizing: border-box;
+    padding-left: calc($grid-gutter-width * .5);
+    padding-right: calc($grid-gutter-width * .5);
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 100%;
+    margin: 0 auto;
+
+    @include media-breakpoint(lg) {
+        padding-left: calc($grid-gutter-width * .25);
+        padding-right: calc($grid-gutter-width * .25);
+    }
+
+    @include media-breakpoint(sm) {
+        padding-left: calc($grid-gutter-width * .1);
+        padding-right: calc($grid-gutter-width * .1);
+    }
+}
+
+
+.container {
+    @extend %container;
+
+    // @include media-breakpoint(lg) {
+    //     background-color: blue
+    // }
+
+    // @include media-breakpoint(md) {
+    //     background-color: red
+    // }
+
+    // @include media-breakpoint(350px) {
+    //     background-color: orange
+    // }
+    &-basic{
+        @extend %container;
+        max-width: 1320px;
+    }
+}
+
+
+
+
+// .containerBasic{
+//     @extend %container;
+//     max-width: map.get($container-max-widths, 'xxl');
+// }

@@ -1,0 +1,36 @@
+//- Meta tags
+meta(charset="UTF-8")
+meta(name="viewport" content="width=device-width, initial-scale=1.0")
+meta(http-equiv="X-UA-Compatible" content="ie=edge")
+
+//- Page title & meta description
+title= title || 'Default Title | Your Company'
+meta(name="description" content=description || 'Default description for your website')
+
+//- Favicon
+link(rel="icon" href="/assets/images/favicon.ico")
+link(rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png")
+
+//- Open Graph meta tags for social sharing
+meta(property="og:title" content=title || 'Default Title | Your Company')
+meta(property="og:description" content=description || 'Default description for your website')
+meta(property="og:image" content=ogImage || '/assets/images/og-image.jpg')
+meta(property="og:url" content=currentUrl || 'https://yourwebsite.com')
+meta(property="og:type" content="website")
+
+//- Twitter Card meta tags
+meta(name="twitter:card" content="summary_large_image")
+meta(name="twitter:title" content=title || 'Default Title | Your Company')
+meta(name="twitter:description" content=description || 'Default description for your website')
+meta(name="twitter:image" content=ogImage || '/assets/images/og-image.jpg')
+
+//- Fonts
+//- link(rel="preconnect" href="https://fonts.googleapis.com")
+//- link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+//- link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet")
+
+//- CSS
+link(rel="stylesheet", href="css/main.css")
+
+//- Additional CSS
+block additionalStyles

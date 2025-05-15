@@ -1,0 +1,67 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as space;
+@use '../abstracts/mixins' as breakpoint;
+@use '../abstracts/rfs/rfs-dart.scss' as rfs;
+
+.headingHeroSimple{
+    &__heading{
+        &-action{
+            font-weight: vars.$font-weight-medium;
+        }
+        &-subtitle{
+            font-weight: vars.$font-weight-medium;
+            @include rfs.font-size(vars.$h5-font-size);
+        }
+        &-title{
+            font-family: vars.$font-family-base;
+            line-height: .9;
+            font-weight: vars.$font-weight-bold;
+            text-transform: uppercase;
+            letter-spacing: -5px;
+            @include space.spacer(2, margin-bottom);
+            @include space.spacer(4, margin-top);
+            @include rfs.font-size(vars.$h4-font-display);
+        }
+        &-description{
+            font-weight: vars.$font-weight-medium;
+            @include rfs.font-size(vars.$h4-font-size);
+            @include space.spacer(6, margin-bottom);
+        }
+    }
+    @include breakpoint.media-breakpoint(sm) {
+        &__heading{
+            &-title{
+                letter-spacing: -2px;
+                line-height: 1.2;
+                @include space.spacer(2, margin-bottom);
+                @include space.spacer(2, margin-top);
+                @include rfs.font-size(vars.$h6-font-display);
+            }
+            &-description{
+                font-weight: vars.$font-weight-medium;
+                @include rfs.font-size(vars.$font-size-sm);
+                @include space.spacer(4, margin-bottom);
+            }
+        }
+    }
+}
+
+
+.headingHeroBig{
+    &__heading{
+        &-title{
+            font-family: vars.$font-family-heading;
+            font-weight: vars.$font-weight-bold;
+            text-transform: uppercase;
+            line-height: .9;
+            @include space.spacer(2, margin-bottom);
+            @include space.spacer(4, margin-top);
+            @include rfs.font-size(vars.$h1-font-display * 1.2);
+        }
+        &-description{
+            font-weight: vars.$font-weight-medium;
+            @include rfs.font-size(vars.$h4-font-size);
+            @include space.spacer(6, margin-bottom);
+        }
+    }
+}

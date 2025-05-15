@@ -1,0 +1,34 @@
+//- Card Group Component
+//- @param {Object} options - Card options
+//- @param {String} options.title - Card title
+//- @param {String} options.image - Card image URL
+//- @param {Boolean} options.hasFooter - Include footer
+//- @param {String} options.style - Card style (default, bordered, shadow)
+
+mixin card(options)
+    - const defaults = {title: '', image: '', hasFooter: false, style: 'default', classes: ''}
+    - const opts = Object.assign({}, defaults, options || {})
+    - const styleClass = opts.style !== 'default' ? `card--${opts.style}` : ''
+    - const allClasses = ['card', styleClass, opts.classes].filter(Boolean).join(' ')
+    
+    .card(class=allClasses)&attributes(attributes)
+        if opts.image
+            .card__image
+                img(src=opts.image, alt=opts.title || 'Card image')
+        
+        if opts.title
+            .card__header
+                h3.card__title= opts.title
+        
+        .card__body
+            block
+
+mixin cardProjectSimple(options)
+    - const defaults = {title: '', image: '',}
+    - const opts = Object.assign({}, defaults, options || {})
+
+    .cardProjectSimple
+        .cardProjectSimple__media 
+            img(src=require(`../../assets/images/${opts.image}`))
+        .cardProjectSimple__heading
+            .cardProjectSimple__heading-title= opts.title

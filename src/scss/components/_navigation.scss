@@ -1,0 +1,12 @@
+@use '../abstracts' as vars;
+
+nav.menuSimple{
+    ul{
+        display: flex;
+        justify-content: space-between;
+        li{
+            font-weight: vars.$font-weight-medium;
+            @include vars.font-size(vars.$h5-font-size);
+        }
+    }
+}

@@ -1,0 +1,17 @@
+extends base
+include ../mixins/index
+
+block header
+    +header({
+        style: headerStyle || 'default',
+        hasSearch: headerHasSearch || false
+    })
+
+block content
+    block main-content
+
+block footer
+    +footer({
+        style: footerStyle || 'default',
+        hasSocial: footerHasSocial || true
+    })

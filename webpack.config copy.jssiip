@@ -1,0 +1,242 @@
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const glob = require('glob');
+
+// Import PurgeCSS config
+const purgeCSSConfig = require('./purgecss.config.js');
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
+// Dapatkan semua file Pug dari folder pages
+const pugFiles = glob.sync('./src/pug/pages/**/*.pug');
+
+// Buat array plugins
+const plugins = [
+    new MiniCssExtractPlugin({
+        filename: isDevelopment ? 'css/[name].css' : 'css/[name].[contenthash].css'
+    })
+];
+
+// Tambahkan PurgeCSS hanya untuk production
+if (!isDevelopment) {
+    plugins.push(purgeCSSConfig);
+}
+
+// Tambahkan HtmlWebpackPlugin untuk setiap file Pug
+pugFiles.forEach(pugFile => {
+    const filename = path.basename(pugFile).replace('.pug', '.html');
+    plugins.push(
+        new HtmlWebpackPlugin({
+            template: pugFile,
+            filename: filename,
+            minify: !isDevelopment ? {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true
+            } : false
+        })
+    );
+});
+
+module.exports = {
+    entry: {
+        main: './src/js/main.js'
+    },
+    output: {
+        filename: isDevelopment ? 'js/[name].js' : 'js/[name].[contenthash].js',
+        path: path.resolve(__dirname, 'dist'),
+        clean: true
+    },
+    module: {
+        rules: [
+            // JavaScript
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+            // SCSS - KONFIGURASI OPTIMAL UNTUK HMR
+            {
+                test: /\.scss$/,
+                use: [
+                    // KUNCI: Selalu gunakan style-loader untuk development
+                    isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            importLoaders: 2 // Pastikan loader berikutnya dijalankan
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            postcssOptions: {
+                                plugins: [
+                                    'autoprefixer'
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            // Opsi tambahan untuk meningkatkan performa
+                            sassOptions: {
+                                outputStyle: isDevelopment ? 'expanded' : 'compressed',
+                                includePaths: ['node_modules']
+                            }
+                        }
+                    }
+                ]
+            },
+            // CSS - KONFIGURASI OPTIMAL UNTUK HMR
+            {
+                test: /\.css$/,
+                use: [
+                    // Gunakan style-loader untuk development
+                    isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: isDevelopment,
+                            postcssOptions: {
+                                plugins: [
+                                    'autoprefixer'
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            // Pug
+            {
+                test: /\.pug$/,
+                use: [
+                    {
+                        loader: 'pug-loader',
+                        options: {
+                            pretty: isDevelopment
+                        }
+                    }
+                ]
+            },
+            // Images
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/images/[name].[hash][ext]'
+                }
+            },
+            // Videos
+            {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/videos/[name].[hash][ext]'
+                }
+            },
+            // Fonts
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+                generator: {
+                    // filename: 'assets/fonts/acumin-pro-extra-condensed/[name].[hash][ext]'
+                    filename: 'assets/fonts/[path][name].[hash][ext]'
+                    // filename: 'assets/fonts/[path][name].[hash][ext]'
+                }
+            }
+        ]
+    },
+    optimization: {
+        minimize: !isDevelopment,
+        minimizer: [
+            new TerserPlugin({
+                extractComments: false,
+                terserOptions: {
+                    format: {
+                        comments: false,
+                    },
+                },
+            }),
+            // new CssMinimizerPlugin()
+        ],
+    },
+    plugins: plugins,
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        watchFiles: {
+            // paths: ['src/**/*.pug', 'src/**/*.js'], // Tetap pantau file-file ini
+            paths: ['src/**/*.pug'], // Tetap pantau file-file ini
+            options: {
+                usePolling: false,
+            },
+        },
+        compress: true,
+        port: 4194,
+        hot: 'only', // Ubah ke 'only' untuk mencegah fallback ke liveReload otomatis
+        liveReload: false, // Aktifkan liveReload untuk file yang tidak mendukung HMR
+        // open: true,
+        open: {
+            app: {
+              name: ['google-chrome', '--incognito'],
+              // Untuk Firefox: ['firefox', '--private-window']
+            }
+        },
+        // Konfigurasi untuk mengurangi log
+        client: {
+            logging: 'error', // Hanya tampilkan error (opsi: 'none', 'error', 'warn', 'info', 'log', 'verbose')
+            overlay: {
+                errors: true,
+                warnings: true, // Tidak menampilkan overlay untuk warnings
+            },
+            progress: false // Matikan progress bar
+        },
+        // Mengurangi log pada terminal
+        devMiddleware: {
+            stats: {
+                all: false,
+                errors: true,
+                errorDetails: true,
+                warnings: true,
+                // Hanya log yang penting
+                modules: false,
+                assets: false,
+                chunks: false,
+                colors: true
+            }
+        }
+    },
+    mode: isDevelopment ? 'development' : 'production',
+    devtool: isDevelopment ? 'eval-source-map' : false,
+    // Tambahkan watch untuk development
+    // watch: isDevelopment,
+    watchOptions: {
+        ignored: /node_modules/,
+        aggregateTimeout: 300,
+        poll: 1000,
+    }
+};

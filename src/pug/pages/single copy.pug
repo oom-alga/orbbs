@@ -1,0 +1,33 @@
+extends ../layouts/default
+
+block main-content
+
+    .single 
+        +singleBasic({
+            title: ['creative team.', 'It later launched'],
+            containerClass: 'container'
+        })
+        +thumbnail()
+
+        +aboutClient({
+            title: ['creative team.', 'It later launched'],
+            containerClass: 'container'
+        })
+
+
+        +portfolioBasic()
+        //- singleBasic
+
+    //- h1 0000 00 00 00 0 0 0 0000
+    //- +button({style: 'outline', size: 'small'}) Sign In
+
+    //- hr
+
+    //- img(src="https://upload.wikimedia.org/wikipedia/commons/a/a0/%22%2430_every_Thursday%22_pension_plan_out_as_President_discusses_political_situation_with_California_candidates._Washington%2C_D.C.%2C_Sept._27._Sheridan_Downey%2C_who_defeated_Senator_William_Gibbs_LCCN2016874059.jpg", alt="")
+
+    //- +card({title: 'Clean Design', style: 'shadow', hasFooter: true})
+    //-     p Modern, minimalist design that puts your content first
+
+
+block footer 
+    p Footer SIngle

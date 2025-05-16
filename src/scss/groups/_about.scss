@@ -1,0 +1,39 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as space;
+@use '../abstracts/rfs/rfs-dart.scss' as rfs;
+
+.aboutClient{
+    background-color: red;
+    &__caption{
+        // display: flex;
+        background-color: orange;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        align-items: end;
+        justify-content: space-between;
+        @include space.spacer(6, column-gap);
+    }
+    &__content{
+        flex: 1 1 auto;
+        max-width: 720px;
+        @include rfs.font-size(vars.$h5-font-size);
+        p:not(:last-child){
+            @include space.spacer(3, margin-bottom);
+        }
+    }
+    &__heading{
+        grid-column-start: 1;
+        grid-column-end: 3;
+        &-title{
+            font-family: vars.$font-family-heading;
+            font-weight: vars.$font-weight-bold;
+            text-transform: uppercase;
+            line-height: .8;
+            // letter-spacing: -2px;
+            @include rfs.font-size(vars.$h2-font-display);
+        }
+    }
+    &__info {
+        flex: 0 0 auto;
+    }
+}

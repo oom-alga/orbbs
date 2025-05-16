@@ -1,29 +1,51 @@
 mixin projectListHorizontal()
     include ../groups/card
-
     .projectListHorizontal
         .projectListHorizontal__lists 
+            -
+                //- var projectSimple = [
+                //-     {title: "Apartment", image: "basic.jpg"},
+                //-     {title: "Townhouse", image: "basic.jpg"},
+                //-     {title: "Cluster House", image: "basic.jpg"},
+                //-     {title: "Villa", image: "basic.jpg"},
+                //- ]
+
+
+                var projectSimple = [
+                    {title: "Lorem Ipsum", image: "project/image-01.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-02.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-03.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-04.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-05.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-06.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-07.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-01.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-02.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-03.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-04.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-05.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-06.jpg"},
+                    {title: "Lorem Ipsum", image: "project/image-07.jpg"},
+                ]
+
+            each project in projectSimple
+                a(href=`${project.title}`) 
+                    .projectListHorizontal__lists-list.list
+                        +cardProjectSimple({title: `${project.title}`, image: `${project.image}`})
+
+mixin projectListBasic()
+    include ../groups/card
+    .projectListBasic
+        .projectListBasic__lists 
             -
                 var projectSimple = [
                     {title: "Apartment", image: "basic.jpg"},
                     {title: "Townhouse", image: "basic.jpg"},
                     {title: "Cluster House", image: "basic.jpg"},
                     {title: "Villa", image: "basic.jpg"},
-                    {title: "Container House", image: "basic.jpg"},
-                    {title: "Minimalist House", image: "basic.jpg"},
-                    {title: "Traditional House", image: "basic.jpg"},
-                    {title: "Luxury Home", image: "basic.jpg"},
-                    {title: "Tiny House", image: "basic.jpg"},
-                    {title: "Cabin", image: "basic.jpg"},
-                    {title: "Farm", image: "basic.jpg"},
-                    {title: "Floating House", image: "basic.jpg"},
-                    {title: "Bar", image: "basic.jpg"},
-                    {title: "Cafe", image: "basic.jpg"},
-                    {title: "Office", image: "basic.jpg"},
-                    {title: "Store", image: "basic.jpg"},
                 ]
 
             each project in projectSimple
                 a(href=`${project.title}`) 
-                    .projectListHorizontal__lists-list.list
+                    .projectListBasic__lists-list
                         +cardProjectSimple({title: `${project.title}`, image: `${project.image}`})

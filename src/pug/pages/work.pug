@@ -1,0 +1,143 @@
+extends ../layouts/default
+
+block main-content 
+    .workPage 
+        //- +hero-singleHorizontal()
+        section.sectionHeroSimple
+            .container
+                .sectionHeroSimple__caption
+                    .sectionHeroSimple__heading
+                        //- +groupHeadingSection()
+                        .groupHeadingSection
+                            .groupHeadingSection__title
+                                //- +componentTypographyTitle()
+                                .componentTypographyTitle
+                                    | WORK
+                            .groupHeadingSection__description  
+                                .componentTypographyDescription
+                                    | WE ARE A CREATIVE STUDIO, SPECIALIZED IN STRATEGY, BRANDING 
+                                    br
+                                    |  DESIGN, AND DEVELOPMENT. OUR WORK IS ALWAYS AT THE INTERSECTION 
+                                    br 
+                                    |  OF DESIGN AND TECHNOLOGY.
+                            //- TODO: fix this
+
+                            //- 
+
+
+        section.sectionProjectGrid 
+            .container
+                .sectionProjectGrid__lists
+
+
+                    .groupProjectGrid
+                        -
+                            var projectSimple = [
+                                {title: "Project 1", image: "image1.jpg", size: "--c: 1; --s: 4;"},
+                                {title: "Project 1", image: "image1.jpg", size: "--c: 7; --s: 6;"},
+                            ]
+
+                        each project in projectSimple
+                            .groupProjectGrid__list(style=`${project.size}`)
+                                
+                                //- +cardDefaultCard
+                                .cardDefaultCard
+                                    .cardDefaultCard__media 
+                                        img(src=require(`../../assets/images/basic.jpg`))
+                                    .cardDefaultCard__heading 
+                                        .cardDefaultCard__heading-title 
+                                            .componentTypographyCardTitle
+                                                | Lorem, ipsum dolor.
+                                        //- .cardDefaultCard__heading-description
+                                        //-     | Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, laboriosam.
+
+                    .groupProjectGrid
+                        -
+                            var projectSimple = [
+                                {title: "Project 1", image: "image1.jpg", size: "--c: 3; --s: 8;"},
+                            ]
+
+                        each project in projectSimple
+                            .groupProjectGrid__list(style=`${project.size}`)
+                                
+                                //- +cardDefaultCard
+                                .cardDefaultCard
+                                    .cardDefaultCard__media 
+                                        img(src=require(`../../assets/images/basic.jpg`))
+                                    .cardDefaultCard__heading 
+                                        .cardDefaultCard__heading-title 
+                                            .componentTypographyCardTitle
+                                                | Lorem, ipsum dolor.
+
+                    .groupProjectGrid(style="align-items: center")
+                            .groupProjectGrid__list(style='--c: 1; --s: 4;')
+                                
+                                //- +cardDefaultCard
+                                .cardDefaultCard
+                                    .cardDefaultCard__media 
+                                        img(src=require(`../../assets/images/basic.jpg`))
+                                    .cardDefaultCard__heading 
+                                        .cardDefaultCard__heading-title 
+                                            .componentTypographyCardTitle
+                                                | Lorem, ipsum dolor.
+                            .groupProjectGrid__list(style='--c: 8; --s: 5;')
+                                
+                                //- +cardDefaultCard
+                                .cardDefaultCard
+                                    .cardDefaultCard__media 
+                                        img(src=require(`../../assets/images/vertical.jpg`))
+                                    .cardDefaultCard__heading 
+                                        .cardDefaultCard__heading-title 
+                                            .componentTypographyCardTitle
+                                                | Lorem, ipsum dolor.
+
+                    .groupProjectGrid
+                        -
+                            var projectSimple = [
+                                {title: "Project 1", image: "image1.jpg", size: "--c: 2; --s: 8;"},
+                            ]
+
+                        each project in projectSimple
+                            .groupProjectGrid__list(style=`${project.size}`)
+                                
+                                //- +cardDefaultCard
+                                .cardDefaultCard
+                                    .cardDefaultCard__media 
+                                        img(src=require(`../../assets/images/basic.jpg`))
+                                    .cardDefaultCard__heading 
+                                        .cardDefaultCard__heading-title 
+                                            .componentTypographyCardTitle
+                                                | Lorem, ipsum dolor.
+
+                    .groupProjectGrid(style="align-items: center")
+                        .groupProjectGrid__list(style='--c: 1; --s: 4;')
+                            
+                            //- +cardDefaultCard
+                            .cardDefaultCard
+                                .cardDefaultCard__media 
+                                    img(src=require(`../../assets/images/vertical.jpg`))
+                                .cardDefaultCard__heading 
+                                    .cardDefaultCard__heading-title 
+                                        .componentTypographyCardTitle
+                                            | Lorem, ipsum dolor.
+                        .groupProjectGrid__list(style='--c: 6; --s: 6;')
+                            
+                            //- +cardDefaultCard
+                            .cardDefaultCard
+                                .cardDefaultCard__media 
+                                    img(src=require(`../../assets/images/basic.jpg`))
+                                .cardDefaultCard__heading 
+                                    .cardDefaultCard__heading-title 
+                                        .componentTypographyCardTitle
+                                            | Lorem, ipsum dolor.
+
+        section.sectionProjectContentShort 
+            .container 
+                .sectionProjectGrid__content 
+                    .sectionProjectGrid__content-large 
+                        | In this final section, witness the tangible impact of isometric infographics on audience engagement, brand recall, and the overall success of your rebranding endeavor. Real-world examples showcase the versatility of isometric design, offering a glimpse into its transformative power in different marketing contexts.
+                    .sectionProjectGrid__content-description
+                        | As your brand embraces a fresh aesthetic with isometric infographics, explore the roadmap ahead. Peek into upcoming campaigns, initiatives, and the strategic role isometric design plays in propelling your brand towards future success. Redefine your visual identity and storytelling capabilities with isometric infographics, as we navigate the exciting possibilities that lie on the horizon of your rebranded look.
+
+
+block footer

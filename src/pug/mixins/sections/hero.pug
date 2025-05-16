@@ -12,10 +12,16 @@ mixin hero-singleHorizontal(options)
 mixin singleBasic(options)
     include ../components/button
     include ../groups/heading
+
+
+    - const defaults = {title: '', containerClass: 'container'}
+    - const opts = Object.assign({}, defaults, options || {})
+
     section.singleBasic  
-        .singleBasic__backAction 
-            a(href="#")
-                +buttonBack 
-                    | Back To All Work
-        .singleBasic__title 
-            +headingHeroBig
+        div(class=opts.containerClass)
+            .singleBasic__backAction 
+                a(href="#")
+                    +buttonBack 
+                        | Back To All Work
+            .singleBasic__title 
+                +headingHeroBig

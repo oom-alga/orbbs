@@ -1,0 +1,42 @@
+mixin aboutClient(options)
+
+    - const defaults = {title: '', containerClass: 'container'}
+    - const opts = Object.assign({}, defaults, options || {})
+
+
+    section.aboutClient  
+        div(class=opts.containerClass)
+            .aboutClient__caption
+                .aboutClient__heading 
+                    .aboutClient__heading-title 
+                        if Array.isArray(opts.title)
+                            each item, index in opts.title
+                                | #{item}
+                                if index < opts.title.length - 1
+                                    br.destroy
+                        else
+                            | #{opts.title}
+                .aboutClient__content 
+                    p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis necessitatibus nam autem quibusdam architecto. Deleniti ullam dicta assumenda, distinctio debitis veritatis minima in, obcaecati voluptatum sint, eveniet nostrum unde ipsam.
+                    p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus soluta cupiditate explicabo doloribus hic fuga odit! Voluptatibus molestias impedit cupiditate temporibus dolore, sapiente necessitatibus dolorum sed omnis ducimus est inventore.
+                .aboutClient__info 
+
+                    .cardInfoLists 
+                        .cardInfoLists__lists 
+                            .cardInfoLists__list
+                                .cardInfoLists__list-title
+                                    | Client
+                                .cardInfoLists__list-data
+                                    | UNHCR
+
+                            .cardInfoLists__list
+                                .cardInfoLists__list-title
+                                    | Project
+                                .cardInfoLists__list-data
+                                    | Christmas Airsentials
+
+                            .cardInfoLists__list
+                                .cardInfoLists__list-title
+                                    | Release Date
+                                .cardInfoLists__list-data
+                                    | 2020

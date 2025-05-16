@@ -2,7 +2,7 @@
 
 
 // @use './layouts/' as *;
-@forward './layouts/';
+// @forward './layouts/';
 @forward './components/';
 @forward './groups/';
 @forward './sections/';
@@ -16,5 +16,14 @@
 @include breakpoint.media-breakpoint(sm) {
 	br.destroy {
 		display:none;
+	}
+}
+
+
+.single{
+	& > *{
+		display: flex;
+		flex-direction: column;
+		gap: 120px;
 	}
 }

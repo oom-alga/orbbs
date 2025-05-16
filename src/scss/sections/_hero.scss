@@ -26,7 +26,7 @@
     }
     &__caption{
         width: 100%;
-        @include space.spacer(4, "padding-bottom");
+        @include space.spacer(6, "padding-bottom");
     }
 
     @include breakpoint.media-breakpoint(md) {
@@ -50,7 +50,7 @@
 
 .singleBasic{
     padding-top: 150px;
-    display: flex;
-    flex-direction: column;
-    @include space.spacer(6, "gap");
+    // display: flex;
+    // flex-direction: column;
+    // @include space.spacer(6, "gap");
 }

@@ -7,6 +7,7 @@
     margin-right: auto;
     margin-left: auto;
     max-width: 100%;
+    width: 100%;
     margin: 0 auto;
 
     @include media-breakpoint(lg) {
@@ -38,6 +39,10 @@
     &-basic{
         @extend %container;
         max-width: 1320px;
+    }
+    &-article{
+        @extend %container;
+        max-width: 1480px;
     }
 }
 

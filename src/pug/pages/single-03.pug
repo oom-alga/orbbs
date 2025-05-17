@@ -3,6 +3,10 @@ extends ../layouts/default
 block main-content
 
     .single-page
+        section.sectionThumbnailArticle-large(class="padding-firstSection")
+            .container
+                .sectionThumbnailArticle__media     
+                    img(src=require(`../../assets/images/project/image-08.jpg`))
         section.sectionHeroArticle
             .container-basic
                 .sectionHeroArticle__caption
@@ -17,10 +21,6 @@ block main-content
                                 //- +componentTypographyTitle()
                                 .componentTypographyTitle
                                     | Jules Journey - Audrey
-        section.sectionThumbnailArticle
-            .container-article
-                .sectionThumbnailArticle__media     
-                    img(src=require(`../../assets/images/project/image-08.jpg`))
         section.sectionDescriptionArticle
             .container-basic
                 .sectionDescriptionArticle__description 
@@ -42,29 +42,24 @@ block main-content
                         | In this final section, witness the tangible impact of isometric infographics on audience engagement, brand recall, and the overall success of your rebranding endeavor.
                     .componentTypographyDescription-small
                         | As your brand embraces a fresh aesthetic with isometric infographics, explore the roadmap ahead. Peek into upcoming campaigns, initiatives, and the strategic role isometric design plays in propelling your brand towards future success. Redefine your visual identity and storytelling capabilities with isometric infographics, as we navigate the exciting possibilities that lie on the horizon of your rebranded look.
-        section.sectionProjectArticleLists
-            .container-article
-                .sectionProjectArticleLists__list
-                    each val in [2, 7, 3]
-                        .cardDefaultCard
-                            .cardDefaultCard__media 
-                                img(src=require(`../../assets/images/project/image-0${val}.jpg`))
-                            //- .cardDefaultCard__heading 
-                            //-     .cardDefaultCard__heading-title 
-                            //-         .componentTypographyCardTitle
-                            //-             | Lorem, ipsum dolor.
-        section.sectionDescriptionArticle
-            .container-basic
-                .sectionDescriptionArticle__description 
-                    .componentTypographyDescription-large
-                        | Embark on a visual transformation journey as we integrate captivating isometric infographics into the fabric of your rebranding initiative. 
-                    .componentTypographyDescription-small
-                        | This section unfolds the strategic significance and creative impact of isometric design, inviting you to reimagine and rediscover the essence of your brand's aesthetic identity.
-                    .componentTypographyDescription-small
-                        | Currently living & working in Poland. Senior Product Designer at Giant Eagle. Framer Developer, Expert & Partner. My work is focused on creating bespoke, effective & engaging digital experiences with meticulous attention to detail.
 
-
-
+                    .groupShare 
+                        .groupShare__lists
+                            .groupShare__lists-list
+                                .componentSosmed
+                                    | Fb.
+                            .groupShare__lists-list
+                                .componentSosmed
+                                    | Tw.
+                            .groupShare__lists-list
+                                .componentSosmed
+                                    | Ig.
+                            .groupShare__lists-list
+                                .componentSosmed
+                                    | X.
+                            .groupShare__lists-list
+                                .componentSosmed
+                                    | Db.
 
 block footer 
     p Footer SIngle

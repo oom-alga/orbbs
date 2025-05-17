@@ -1,0 +1,54 @@
+extends ../layouts/default
+
+block main-content
+
+    .single-horizontal(data-lenis-prevent)
+        section.sectionSpecialSingleHorizontal(data-lenis-prevent)
+            .sectionSpecialSingleHorizontal__main
+                .sectionSpecialSingleHorizontal__heading 
+                    .sectionSpecialSingleHorizontal__heading-title 
+                        .componentTypographyTitle
+                            | Jules Journey - Audrey
+                    .sectionSpecialSingleHorizontal__heading-description
+                        .componentTypographyDescription
+                            | Advertisement
+                .sectionSpecialSingleHorizontal__thumbnail
+                    .sectionSpecialSingleHorizontal__thumbnail-media 
+                        img(src=require(`../../assets/images/project/image-08.jpg`))
+                .sectionSpecialSingleHorizontal__description
+                    .container
+                        .componentTypographyDescription-large
+                            | In this final section, witness the tangible impact of isometric infographics on audience engagement, brand recall, and the overall success of your rebranding endeavor.
+                        .componentTypographyDescription-small
+                            | As your brand embraces a fresh aesthetic with isometric infographics, explore the roadmap ahead. Peek into upcoming campaigns, initiatives, and the strategic role isometric design plays in propelling your brand towards future success. Redefine your visual identity and storytelling capabilities with isometric infographics, as we navigate the exciting possibilities that lie on the horizon of your rebranded look.
+                .sectionSpecialSingleHorizontal__contents
+                    each val in [1, 2, 3, 4, 5]
+                        .sectionSpecialSingleHorizontal__contents-content 
+                            img(src=require(`../../assets/images/project/image-0${val}.jpg`))
+                .sectionSpecialSingleHorizontal__credit 
+                    .groupCredit
+                        .groupCredit__lists 
+                            .groupCredit__lists-list 
+                                .componentTypographyDescription-small
+                                    | Client
+                                .componentTypographyDescription
+                                    | Cassio Arc Agency
+                            .groupCredit__lists-list 
+                                .componentTypographyDescription-small
+                                    | Creative Director
+                                .componentTypographyDescription
+                                    | Daneliya L Kharisma
+                            .groupCredit__lists-list 
+                                .componentTypographyDescription-small
+                                    | Designer
+                                .componentTypographyDescription
+                                    | Tyloes Wons, flist Mc Khan, Istan Dumm
+                            .groupCredit__lists-list 
+                                .componentTypographyDescription-small
+                                    | Developer
+                                .componentTypographyDescription
+                                    | Rune-Wielder, Gold Lover
+
+
+block footer 
+    //- 

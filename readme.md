@@ -68,16 +68,17 @@ section.sectionName
 try
 
 section.sectionHeroHorizontal
-    .sectionHeroHorizontal__caption
-        .sectionHeroHorizontal__project
-            +groupProjectHorizontal()
-                +cardProjectBasic()
-        .sectionHeroHorizontal__heading
-            +groupHeading()
-                +componentTypographySubTitle()
-                +componentTypographyTitle()
-                +componentTypographyDescriptin()
-                +componentButtonExplore()
+    .container
+        .sectionHeroHorizontal__main
+            .sectionHeroHorizontal__project
+                +groupProjectHorizontal()
+                    +cardProjectBasic()
+            .sectionHeroHorizontal__heading
+                +groupHeading()
+                    +componentTypographySubTitle()
+                    +componentTypographyTitle()
+                    +componentTypographyDescriptin()
+                    +componentButtonExplore()
 
 
 
@@ -88,7 +89,20 @@ section.sectionHeroHorizontal
 // - Image wajib di rounded. [besar/20, kecil/10]
 // - 
 
+// NOTE - syarat center position
+// - section-wrapper (like __description, __caption) gunakan grid
+// - dan jika ingin center maka
+        - text-align: center
+            & > *{
+                margin: 0 auto;
+            }
 
 https://jules-journey.framer.website/
 https://jonas-template.framer.website/
 https://theme.madsparrow.me/osty/
+
+
+Imange
+https://lenser.framer.website/works/leah-michelle
+
+
